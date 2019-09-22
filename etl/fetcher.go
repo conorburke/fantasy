@@ -8,8 +8,7 @@ import (
 	"regexp"
 )
 
-func fetchFile() string {
-	url := "http://walterfootball.com/fantasy2019rankingsexcel.xlsx"
+func fetchFile(url string) string {
 	fmt.Println("url", url)
 
 	resp, err := http.Get(url)
@@ -18,8 +17,7 @@ func fetchFile() string {
 	}
 	defer resp.Body.Close()
 
-	re := regexp.MustCompile(`([^\/]+$)`)
-	filename := re.FindString(url)
+	filename := getSpreadsheetName(url)
 
 	file, err := os.Create(fmt.Sprintf("/tmp/%s", filename))
 	if err != nil {
@@ -30,4 +28,9 @@ func fetchFile() string {
 	_, err = io.Copy(file, resp.Body)
 
 	return filename
+}
+
+func getSpreadsheetName(url string) string {
+	re := regexp.MustCompile(`([^\/]+$)`)
+	return re.FindString(url)
 }

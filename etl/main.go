@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
-	go fetchAndConvertFile()
+	//may make this a command line arg in future
+	url := "http://walterfootball.com/fantasy2019rankingsexcel.xlsx"
+	go fetchAndConvertFile(url)
 
 	port := "9000"
 	fmt.Println("server up and running on port", port)
@@ -20,9 +22,10 @@ func main() {
 	http.ListenAndServe(":"+port, router)
 }
 
-func fetchAndConvertFile() {
+func fetchAndConvertFile(url string) {
 	for {
-		filename := fetchFile()
+		filename := fetchFile(url)
+		fmt.Println("filename", filename)
 		convertExcelFile(filename)
 		time.Sleep(time.Minute * 60)
 	}

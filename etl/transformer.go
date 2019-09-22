@@ -16,20 +16,33 @@ func convertExcelFile(s string) {
 		panic(err)
 	}
 	for _, sheet := range xlFile.Sheets {
-		if !isDisregardCategory(sheet.Name) {
+		if isDesiredCategory(sheet.Name) {
 			fmt.Printf("%s\n", sheet.Name)
 			fileContents := []string{}
-			for _, row := range sheet.Rows {
+			//vbd custom is the final column we want
+			vbd := 1
+			for i, row := range sheet.Rows {
 				cells := []string{}
 				for _, cell := range row.Cells {
 					text := cell.String() + "|"
-					// fmt.Printf("%s", text)
 					cells = append(cells, text)
 				}
+
+				// find the index of the vbd custom column and cut off the slices at that index
+				if i == 0 {
+					for j, v := range cells {
+						if strings.ToLower(v) == "vbd custom|" {
+							vbd += j
+						}
+					}
+				}
+				cells = cells[0:vbd]
+
+				//remove the trailing pipe
 				cells[len(cells)-1] = cells[len(cells)-1][0 : len(cells[len(cells)-1])-1]
-				fmt.Println(strings.Join(cells, ""))
 				fileContents = append(fileContents, strings.Join(cells, ""), "\n")
 			}
+			fmt.Println(fileContents)
 			writeCSVFile(directory, *sheet, []byte(strings.Join(fileContents, "")), 0755)
 		}
 	}
@@ -43,14 +56,15 @@ func writeCSVFile(d string, s xlsx.Sheet, b []byte, p os.FileMode) {
 	ioutil.WriteFile(d+s.Name, b, p)
 }
 
-func isDisregardCategory(category string) bool {
+func isDesiredCategory(category string) bool {
 	switch strings.ToLower(category) {
 	case
-		"vars",
-		"sheet2",
-		"by post",
-		"league boundaries",
-		"notes":
+		"qbs",
+		"rbs",
+		"wrs",
+		"tes",
+		"ks",
+		"defs":
 		return true
 	}
 	return false
