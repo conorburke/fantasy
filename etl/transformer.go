@@ -17,7 +17,7 @@ func convertExcelFile(s string) {
 	}
 	for _, sheet := range xlFile.Sheets {
 		if isDesiredCategory(sheet.Name) {
-			fmt.Printf("%s\n", sheet.Name)
+			fmt.Printf("sheet name sent to %s : %s\n", directory, sheet.Name)
 			fileContents := []string{}
 			//vbd custom is the final column we want
 			vbd := 1
@@ -42,7 +42,7 @@ func convertExcelFile(s string) {
 				cells[len(cells)-1] = cells[len(cells)-1][0 : len(cells[len(cells)-1])-1]
 				fileContents = append(fileContents, strings.Join(cells, ""), "\n")
 			}
-			fmt.Println(fileContents)
+			// fmt.Println(fileContents)
 			writeCSVFile(directory, *sheet, []byte(strings.Join(fileContents, "")), 0755)
 		}
 	}

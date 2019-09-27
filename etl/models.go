@@ -1,7 +1,6 @@
 package main
 
 type offensePlayer struct {
-	ID           int
 	FirstName    string
 	LastName     string
 	Team         string
@@ -28,7 +27,6 @@ type offensePlayer struct {
 }
 
 type kicker struct {
-	ID           int
 	FirstName    string
 	LastName     string
 	Team         string
@@ -51,7 +49,6 @@ type kicker struct {
 }
 
 type defense struct {
-	ID          int
 	Team        string
 	Bye         string
 	RegScore    int
