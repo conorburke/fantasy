@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func readToStruct(s string) {
+func readToStructandDb(s string) {
 	// Open CSV file
 	f, err := os.Open(fmt.Sprintf("/tmp/%s", s))
 	if err != nil {
@@ -54,9 +54,9 @@ func readToStruct(s string) {
 				statement := `insert into kickers (first_name, last_name, team,
 					bye, pos, fg1_to_39, fg40_to_49, fg50_plus, xp, points_espn,
 					vbd_reg, points_ppr, ppr_vbd, points_td, vbd_td, points_two_qb, 
-					vbd_two_qb, points_custom, vbd_custom) 
+					vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
-					$16, $17, $18, $19)`
+					$16, $17, $18, $19, NOW())`
 				stmt, err := db.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
@@ -85,8 +85,8 @@ func readToStruct(s string) {
 				}
 				statement := `insert into defenses (team, bye, reg_score,
 					vbd_reg, points_ppr, ppr_vbd, points_td, vbd_td, points_two_qb, 
-					vbd_two_qb, points_custom, vbd_custom) 
-					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`
+					vbd_two_qb, points_custom, vbd_custom, input_time) 
+					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW())`
 				stmt, err := db.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
@@ -126,9 +126,9 @@ func readToStruct(s string) {
 				statement := `insert into offense_players (first_name, last_name, team,
 					bye, pos, pass_yards, interceptions, rush_yards, catches, rec_yards,
 					reg_tds, bonus, dynst, points_espn, vbd_reg, points_ppr, ppr_vbd,
-					points_td, vbd_td, points_two_qb, vbd_two_qb, points_custom, vbd_custom) 
+					points_td, vbd_td, points_two_qb, vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
-					$16, $17, $18, $19, $20, $21, $22, $23)`
+					$16, $17, $18, $19, $20, $21, $22, $23, NOW())`
 				stmt, err := db.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
