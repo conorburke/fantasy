@@ -10,10 +10,12 @@ script:
 
 after_success:
   - docker build -t conorburke/fantasy-etl ./etl
+  - docker build -t conorburke/fantasy-database ./database
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push conorburke/fantasy-etl
+  - docker push conorburke/fantasy-database
 
 # deploy:
 #   provider: elasticbeanstalk
