@@ -38,10 +38,10 @@ func writeToStructAndDb() {
 		time.Sleep(time.Second * 1)
 		offense := []string{"QBs", "RBs", "WRs", "TEs"}
 		for _, s := range offense {
-			go readToStruct(s)
+			go readToStructandDb(s)
 		}
-		go readToStruct("Ks")
-		go readToStruct("DEFs")
+		go readToStructandDb("Ks")
+		go readToStructandDb("DEFs")
 		time.Sleep(time.Second * 10)
 	}
 }

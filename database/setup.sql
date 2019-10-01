@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS offense_players (
 	points_two_qb  integer DEFAULT '0'::integer NOT NULL,
 	vbd_two_qb     integer DEFAULT '0'::integer NOT NULL,
 	points_custom integer DEFAULT '0'::integer NOT NULL,
-	vbd_custom    integer DEFAULT '0'::integer NOT NULL
+	vbd_custom    integer DEFAULT '0'::integer NOT NULL,
+	input_time timestamp with time zone DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS kickers (
@@ -43,7 +44,8 @@ CREATE TABLE IF NOT EXISTS kickers (
 	points_two_qb  integer DEFAULT '0'::integer NOT NULL,
 	vbd_two_qb     integer DEFAULT '0'::integer NOT NULL,
 	points_custom integer DEFAULT '0'::integer NOT NULL,
-	vbd_custom    integer DEFAULT '0'::integer NOT NULL
+	vbd_custom    integer DEFAULT '0'::integer NOT NULL,
+	input_time timestamp with time zone DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS defenses (
@@ -58,5 +60,6 @@ CREATE TABLE IF NOT EXISTS defenses (
 	points_two_qb  integer DEFAULT '0'::integer NOT NULL,
 	vbd_two_qb     integer DEFAULT '0'::integer NOT NULL,
 	points_custom integer DEFAULT '0'::integer NOT NULL,
-	vbd_custom    integer DEFAULT '0'::integer NOT NULL
+	vbd_custom    integer DEFAULT '0'::integer NOT NULL,
+	input_time timestamp with time zone DEFAULT NOW()
 );
