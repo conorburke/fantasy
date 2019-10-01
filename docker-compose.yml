@@ -1,5 +1,16 @@
 version: '3'
 services:
+  api:
+    build: ./api
+    environment:
+      - PORT=7000
+    ports:
+      - '7000:7000'
+    depends_on:
+      - database
+    # restart: always
+    links:
+      - database
   etl:
     build: ./etl
     ports:
