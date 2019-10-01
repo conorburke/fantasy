@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/julienschmidt/httprouter"
-	"net/http"
 	"time"
 )
 
@@ -11,13 +9,7 @@ func main() {
 	//may make this a command line arg in future
 	url := "http://walterfootball.com/fantasy2019rankingsexcel.xlsx"
 	go fetchAndConvertFile(url)
-	go writeToStructAndDb()
-	port := "9000"
-	fmt.Println("server up and running on port", port)
-
-	router := httprouter.New()
-	router.GET("/", indexHandler)
-	http.ListenAndServe(":"+port, router)
+	writeToStructAndDb()
 }
 
 func fetchAndConvertFile(url string) {
@@ -42,7 +34,7 @@ func writeToStructAndDb() {
 		}
 		go readToStructandDb("Ks")
 		go readToStructandDb("DEFs")
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Minute * 10)
 	}
 }
 
@@ -54,9 +46,4 @@ func clearDb(s string) {
 	}
 	sta.QueryRow()
 	sta.Close()
-}
-
-func indexHandler(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	res.Header().Set("Content-Type", "text/plain")
-	res.Write([]byte("Leave Me Here"))
 }
