@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"github.com/conorburke/fantasy/common"
 )
 
 func main() {
@@ -40,7 +41,7 @@ func writeToStructAndDb() {
 
 func clearDb(s string) {
 	st := fmt.Sprintf("delete from %s", s)
-	sta, err := db.Prepare(st)
+	sta, err := common.DB.Prepare(st)
 	if err != nil {
 		panic(err)
 	}

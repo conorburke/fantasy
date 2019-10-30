@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"github.com/conorburke/fantasy/common"
 )
 
 func readToStructandDb(s string) {
@@ -29,7 +30,7 @@ func readToStructandDb(s string) {
 		column := strings.Split(line[0], "|")
 		if i > 0 {
 			if s == "Ks" {
-				data := kicker{
+				data := common.Kicker{
 					FirstName:    column[0],
 					LastName:     column[1],
 					Team:         column[2],
@@ -57,7 +58,7 @@ func readToStructandDb(s string) {
 					vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
 					$16, $17, $18, $19, NOW())`
-				stmt, err := db.Prepare(statement)
+				stmt, err := common.DB.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
 					panic(err)
@@ -69,7 +70,7 @@ func readToStructandDb(s string) {
 					data.PPRVBD, data.PointsTD, data.VBDTD, data.PointsTwoQB,
 					data.VBDTwoQB, data.PointsCustom, data.VBDCustom).Scan(&data.FirstName)
 			} else if s == "DEFs" {
-				data := defense{
+				data := common.Defense{
 					Team:        column[0],
 					Bye:         column[1],
 					RegScore:    sToI(column[2]),
@@ -87,7 +88,7 @@ func readToStructandDb(s string) {
 					vbd_reg, points_ppr, ppr_vbd, points_td, vbd_td, points_two_qb, 
 					vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW())`
-				stmt, err := db.Prepare(statement)
+				stmt, err := common.DB.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
 					panic(err)
@@ -97,7 +98,7 @@ func readToStructandDb(s string) {
 					data.VBDPPR, data.TDScore, data.VBDTD, data.TwoQBScore,
 					data.VBDTwoQB, data.CustomScore, data.VBDCustom).Scan(&data.Team)
 			} else {
-				data := offensePlayer{
+				data := common.OffensePlayer{
 					FirstName:    column[0],
 					LastName:     column[1],
 					Team:         column[2],
@@ -129,7 +130,7 @@ func readToStructandDb(s string) {
 					points_td, vbd_td, points_two_qb, vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
 					$16, $17, $18, $19, $20, $21, $22, $23, NOW())`
-				stmt, err := db.Prepare(statement)
+				stmt, err := common.DB.Prepare(statement)
 				fmt.Println(stmt)
 				if err != nil {
 					panic(err)

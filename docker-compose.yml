@@ -8,6 +8,7 @@ services:
       - '7000:7000'
     depends_on:
       - database
+      - common
     # restart: always
     links:
       - database
@@ -17,9 +18,12 @@ services:
       - '9000:9000' 
     depends_on:
       - database
+      - common
     # restart: always
     links:
       - database
+  common:
+    build: ./common
   database:
     build: ./database  
     ports:
