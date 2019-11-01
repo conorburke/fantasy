@@ -14,9 +14,8 @@ func main() {
 	router := httprouter.New()
 	router.GET("/", indexHandler)
 	router.GET("/offenseplayers", getOffensePlayers)
-	router.GET("/quarterbacks", getQuarterbacks)
-	router.GET("/runningbacks", getRunningBacks)
-	router.GET("/widereceivers", getWideReceivers)
-	router.GET("/tightends", getTightEnds)
+	router.GET("/offenseplayers/:position", getOffensePlayers)
+	router.GET("/kickers", getKickers)
+	router.GET("/defenses", getDefenses)
 	http.ListenAndServe(":"+port, router)
 }

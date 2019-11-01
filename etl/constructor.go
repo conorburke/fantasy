@@ -22,9 +22,6 @@ func readToStructandDb(s string) {
 		panic(err)
 	}
 
-	// fmt.Println("lines")
-	// fmt.Println(lines)
-
 	for i, line := range lines {
 		column := strings.Split(line[0], "|")
 		if i > 0 {
@@ -58,7 +55,7 @@ func readToStructandDb(s string) {
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
 					$16, $17, $18, $19, NOW())`
 				stmt, err := db.Prepare(statement)
-				fmt.Println(stmt)
+				// fmt.Println(stmt)
 				if err != nil {
 					panic(err)
 				}
@@ -88,7 +85,7 @@ func readToStructandDb(s string) {
 					vbd_two_qb, points_custom, vbd_custom, input_time) 
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW())`
 				stmt, err := db.Prepare(statement)
-				fmt.Println(stmt)
+				// fmt.Println(stmt)
 				if err != nil {
 					panic(err)
 				}
@@ -130,7 +127,7 @@ func readToStructandDb(s string) {
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
 					$16, $17, $18, $19, $20, $21, $22, $23, NOW())`
 				stmt, err := db.Prepare(statement)
-				fmt.Println(stmt)
+				// fmt.Println(stmt)
 				if err != nil {
 					panic(err)
 				}
