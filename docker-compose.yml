@@ -25,3 +25,12 @@ services:
     ports:
       - '5432:5432' 
     command: postgres -c 'max_connections=10000'
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+    volumes:
+      - /app/node_modules
+      - ./frontend:/frontend

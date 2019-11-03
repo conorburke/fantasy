@@ -5,6 +5,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"os"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -17,5 +18,9 @@ func main() {
 	router.GET("/offenseplayers/:position", getOffensePlayers)
 	router.GET("/kickers", getKickers)
 	router.GET("/defenses", getDefenses)
-	http.ListenAndServe(":"+port, router)
+	handler := cors.Default().Handler(router)
+	err := http.ListenAndServe(":"+port, handler)
+	if err != nil {
+		fmt.Println(err)
+	}
 }

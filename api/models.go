@@ -47,7 +47,7 @@ type kicker struct {
 	PointsTD     int `json:"pointsTd"`
 	VBDTD        int `json:"vbdTd"`
 	PointsTwoQB  int `json:"pointsTwoQb"`
-	VBDTwoQB     int `json:"vgdTwoQb"`
+	VBDTwoQB     int `json:"vbdTwoQb"`
 	PointsCustom int `json:"pointsCustom"`
 	VBDCustom    int `json:"vbdCustom"`
 }
