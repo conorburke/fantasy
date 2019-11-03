@@ -27,8 +27,8 @@ func readToStructandDb(s string) {
 		if i > 0 {
 			if s == "Ks" {
 				data := kicker{
-					FirstName:    column[0],
-					LastName:     column[1],
+					FirstName:    column[1],
+					LastName:     column[0],
 					Team:         column[2],
 					Bye:          column[3],
 					Pos:          column[4],
@@ -95,8 +95,8 @@ func readToStructandDb(s string) {
 					data.VBDTwoQB, data.CustomScore, data.VBDCustom).Scan(&data.Team)
 			} else {
 				data := offensePlayer{
-					FirstName:    column[0],
-					LastName:     column[1],
+					FirstName:    column[1],
+					LastName:     column[0],
 					Team:         column[2],
 					Bye:          column[3],
 					Pos:          column[4],
