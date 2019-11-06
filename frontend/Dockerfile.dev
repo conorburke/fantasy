@@ -1,0 +1,10 @@
+FROM node:latest
+
+RUN mkdir -p /frontend
+WORKDIR /frontend
+COPY ./ ./
+
+RUN npm install -g yarn
+RUN yarn install
+
+CMD ["yarn", "start"]

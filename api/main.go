@@ -13,11 +13,11 @@ func main() {
 	fmt.Println("server up and running on port", port)
 
 	router := httprouter.New()
-	router.GET("/", indexHandler)
-	router.GET("/offenseplayers", getOffensePlayers)
-	router.GET("/offenseplayers/:position", getOffensePlayers)
-	router.GET("/kickers", getKickers)
-	router.GET("/defenses", getDefenses)
+	router.GET("/api", indexHandler)
+	router.GET("/api/offenseplayers", getOffensePlayers)
+	router.GET("/api/offenseplayers/:position", getOffensePlayers)
+	router.GET("/api/kickers", getKickers)
+	router.GET("/api/defenses", getDefenses)
 	handler := cors.Default().Handler(router)
 	err := http.ListenAndServe(":"+port, handler)
 	if err != nil {
