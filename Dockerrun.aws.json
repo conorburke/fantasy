@@ -13,6 +13,7 @@
       "image": "conorburke/fantasy-api",
       "hostname": "api",
       "essential": false,
+      "links": ["database"],
       "memory": 128
     },
     {
@@ -20,6 +21,7 @@
       "image": "conorburke/fantasy-etl",
       "hostname": "etl",
       "essential": false,
+      "links": ["database"],
       "memory": 128
     },
     {
