@@ -37,15 +37,15 @@ const App: React.FC = () => {
   };
 
   React.useEffect(() => {
-    axios.get('http://localhost:7000/offenseplayers')
+    axios.get('http://localhost:7000/api/offenseplayers')
       .then(res => {
         setAllPlayers(res.data);
       });
-    axios.get('http://localhost:7000/kickers')
+    axios.get('http://localhost:7000/api/kickers')
       .then(res => {
         setKickers(res.data);
       }); 
-    axios.get('http://localhost:7000/defenses')
+    axios.get('http://localhost:7000/api/defenses')
       .then(res => {
         setDefenses(res.data);
       });   

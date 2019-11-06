@@ -1,27 +1,11 @@
-FROM node:latest
+FROM node:alpine as builder
+WORKDIR '/frontend'
+COPY ./package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# if left blank app will run with dev settings
-# to build production image run:
-# $ docker build ./client --build-args app_env=production
-ENV NPM_CONFIG_LOGLEVEL warn
-ARG app_env
-ENV NODE_ENV $app_env
-
-RUN mkdir -p /frontend
-WORKDIR /frontend
-COPY ./ ./
-
-RUN npm install -g yarn
-RUN yarn install
-
-# if dev settings will use create-react start script for hot code relaoding via docker-compose shared volume
-# if production setting will build optimized static files and serve using http-server
-CMD if [ ${NODE_ENV} = production ]; \
-	then \
-	npm install -g http-server && \
-	npm run build && \
-	cd build && \
-	hs -p 3000; \
-	else \
-	npm run start; \
-	fi
+FROM nginx
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /frontend/build /usr/share/nginx/html
