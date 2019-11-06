@@ -23,15 +23,15 @@ after_success:
   - docker push conorburke/fantasy-frontend
   - docker push conorburke/fantasy-nginx
 
-# deploy:
-#   provider: elasticbeanstalk
-#   region: us-east-2
-#   app: magnetar
-#   env: Magnetar-env
-#   bucket_name: elasticbeanstalk-us-east-2-234521127503
-#   bucket_path: upload-magnetar
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key:
-#     secure: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: fantasy
+  env: Fantasy-env
+  bucket_name: fantasy-zipped
+  bucket_path: fantasy-files
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
